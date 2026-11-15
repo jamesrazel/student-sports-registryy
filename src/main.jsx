@@ -13,7 +13,7 @@ const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
 
 const SPORTS = ["Badminton", "Basketball", "Chess", "Football", "Sepak Takraw", "Swimming", "Table Tennis", "Taekwondo", "Volleyball", "Other"];
-const YEARS = ["1st Year", "2nd Year", "3rd Year", "4th Year", "5th Year"];
+const YEARS = ["1st Year", "2nd Year", "3rd Year", "4th Year"];
 const EMPTY_FORM = { name: "", age: "", course: "", year_level: "", sport: "" };
 
 function App() {
@@ -129,15 +129,21 @@ function App() {
             </div>
             <div className="table-wrap">
               <table>
-                <thead><tr><th>STUDENT</th><th>COURSE</th><th>YEAR LEVEL</th><th>SPORT</th><th className="actions-head">ACTIONS</th></tr></thead>
+                <thead><tr><th>STUDENT</th><th>AGE</th><th>COURSE</th><th>YEAR LEVEL</th><th>SPORT</th><th className="actions-head">ACTIONS</th></tr></thead>
                 <tbody>
                   {loading ? <tr><td colSpan="5"><div className="empty-state"><LoaderCircle className="spin" size={22}/><span>Loading student records...</span></div></td></tr>
                   : filtered.length === 0 ? <tr><td colSpan="5"><div className="empty-state"><div className="empty-icon"><Users size={22}/></div><strong>{students.length ? "No matching students" : "Your directory is empty"}</strong><span>{students.length ? "Try another search or filter." : "Add your first student to get started."}</span>{!students.length && <button className="text-btn" onClick={openAdd}><Plus size={15}/> Add first student</button>}</div></td></tr>
                   : filtered.map(student => <tr key={student.id}>
-                    <td><div className="student-cell"><div className="student-avatar">{student.name.trim().charAt(0).toUpperCase()}</div><div><strong>{student.name}</strong><span>{student.age} years old</span></div></div></td>
-                    <td><span className="course-text">{student.course}</span></td>
-                    <td><span className="year-pill">{student.year_level}</span></td>
-                    <td><span className="sport-cell"><span className="sport-dot"></span>{student.sport}</span></td>
+                    <td>
+                      <div className="student-cell">
+                      <div className="student-avatar">{student.name.trim().charAt(0).toUpperCase()}</div>
+                      <div><strong>{student.name}</strong></div>
+                      </div>
+                      </td>
+                      <td>{student.age}</td>
+                      <td><span className="course-text">{student.course}</span></td>
+                      <td><span className="year-pill">{student.year_level}</span></td>
+                      <td><span className="sport-cell"><span className="sport-dot"></span>{student.sport}</span></td>
                     <td><div className="row-actions"><button className="icon-btn" onClick={() => openEdit(student)} title="Edit student" aria-label={`Edit ${student.name}`}><Pencil size={15}/></button><button className="icon-btn delete-btn" onClick={() => deleteStudent(student)} title="Delete student" aria-label={`Delete ${student.name}`}><Trash2 size={15}/></button></div></td>
                   </tr>)}
                 </tbody>
