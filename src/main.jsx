@@ -131,8 +131,8 @@ function App() {
               <table>
                 <thead><tr><th>STUDENT</th><th>AGE</th><th>COURSE</th><th>YEAR LEVEL</th><th>SPORT</th><th className="actions-head">ACTIONS</th></tr></thead>
                 <tbody>
-                  {loading ? <tr><td colSpan="5"><div className="empty-state"><LoaderCircle className="spin" size={22}/><span>Loading student records...</span></div></td></tr>
-                  : filtered.length === 0 ? <tr><td colSpan="5"><div className="empty-state"><div className="empty-icon"><Users size={22}/></div><strong>{students.length ? "No matching students" : "Your directory is empty"}</strong><span>{students.length ? "Try another search or filter." : "Add your first student to get started."}</span>{!students.length && <button className="text-btn" onClick={openAdd}><Plus size={15}/> Add first student</button>}</div></td></tr>
+                  {loading ? <tr><td colSpan="6"><div className="empty-state"><LoaderCircle className="spin" size={22}/><span>Loading student records...</span></div></td></tr>
+                  : filtered.length === 0 ? <tr><td colSpan="6"><div className="empty-state"><div className="empty-icon"><Users size={22}/></div><strong>{students.length ? "No matching students" : "Your directory is empty"}</strong><span>{students.length ? "Try another search or filter." : "Add your first student to get started."}</span>{!students.length && <button className="text-btn" onClick={openAdd}><Plus size={15}/> Add first student</button>}</div></td></tr>
                   : filtered.map(student => <tr key={student.id}>
                     <td>
                       <div className="student-cell">
